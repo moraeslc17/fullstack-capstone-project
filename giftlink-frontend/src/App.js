@@ -6,6 +6,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import LoginPage from './components/LoginPage/LoginPage';
+import SearchPage from './components/SearchPage/SearchPage';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/app" element={<MainPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/app/search" element={<SearchPage />} />
         </Routes>
         </>
   );
