@@ -20,11 +20,11 @@ jobs:
 
       - name: Install dependencies (frontend)
         run: npm install
-        working-directory: ./giftlink-frontend
+        working-directory: giftlink-frontend
 
       - name: Build frontend
         run: npm run build
-        working-directory: ./giftlink-frontend
+        working-directory: giftlink-frontend
 
       - name: ✅ Frontend build success
         run: echo "✅ Frontend built successfully!"
@@ -45,7 +45,7 @@ jobs:
 
       - name: Install dependencies (backend)
         run: npm install
-        working-directory: ./giftlink-backend
+        working-directory: giftlink-backend
 
       - name: ✅ Backend build success
         run: echo "✅ Backend dependencies installed!"
