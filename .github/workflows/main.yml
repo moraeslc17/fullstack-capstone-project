@@ -1,5 +1,5 @@
 # .github/workflows/main.yml
-name: CI Build
+name: CI/CD React Build
 
 on:
   push:
@@ -23,8 +23,8 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Build do projeto
+      - name: Executar build
         run: npm run build
 
-      - name: Testes (se houver)
-        run: echo "Nenhum teste implementado"
+      - name: Build finalizado com sucesso
+        run: echo "✅ Build concluído com sucesso!"
