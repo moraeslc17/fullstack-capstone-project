@@ -6,8 +6,8 @@ on:
 
 jobs:
   build-frontend:
-    name: Build React Frontend
     runs-on: ubuntu-latest
+    name: Build Frontend
 
     steps:
       - name: Checkout code
@@ -18,20 +18,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies (frontend)
+      - name: Install frontend dependencies
         run: npm install
-        working-directory: ./giftlink-frontend
+        working-directory: giftlink-frontend
 
       - name: Build frontend
         run: npm run build
-        working-directory: ./giftlink-frontend
-
-      - name: ✅ Frontend build success
-        run: echo "✅ Frontend built successfully!"
+        working-directory: giftlink-frontend
 
   build-backend:
-    name: Build Node Backend
     runs-on: ubuntu-latest
+    name: Build Backend
     needs: build-frontend
 
     steps:
@@ -43,9 +40,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies (backend)
+      - name: Install backend dependencies
         run: npm install
-        working-directory: ./giftlink-backend
-
-      - name: ✅ Backend build success
-        run: echo "✅ Backend dependencies installed!"
+        working-directory: giftlink-backend
