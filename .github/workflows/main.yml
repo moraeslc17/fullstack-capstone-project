@@ -13,10 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Corrigir subdiretório duplicado
+      - name: Corrigir subpasta extra
         run: |
-          mv fullstack-capstone-project/* . 
-          rmdir fullstack-capstone-project
+          shopt -s dotglob
+          mv fullstack-capstone-project/* .
+          rm -rf fullstack-capstone-project
+
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -43,10 +45,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Corrigir subdiretório duplicado
+      - name: Corrigir subpasta extra
         run: |
-          mv fullstack-capstone-project/* . 
-          rmdir fullstack-capstone-project
+          shopt -s dotglob
+          mv fullstack-capstone-project/* .
+          rm -rf fullstack-capstone-project
+
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -59,3 +63,4 @@ jobs:
 
       - name: ✅ Backend build success
         run: echo "✅ Backend dependencies installed!"
+
