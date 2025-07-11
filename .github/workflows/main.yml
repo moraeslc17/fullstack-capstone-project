@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Corrigir subpasta extra
-        run: |
-          shopt -s dotglob
-          mv fullstack-capstone-project/* .
-          rm -rf fullstack-capstone-project
-
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -45,13 +38,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Corrigir subpasta extra
-        run: |
-          shopt -s dotglob
-          mv fullstack-capstone-project/* .
-          rm -rf fullstack-capstone-project
-
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -63,4 +49,3 @@ jobs:
 
       - name: ✅ Backend build success
         run: echo "✅ Backend dependencies installed!"
-
