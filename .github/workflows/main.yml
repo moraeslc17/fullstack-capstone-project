@@ -6,55 +6,34 @@ on:
 
 jobs:
   build-frontend:
-    name: Build React Frontend
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: fullstack-capstone-project/giftlink-frontend
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          path: fullstack-capstone-project
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies (frontend)
+      - name: Install frontend dependencies
         run: npm install
+        working-directory: ./giftlink-frontend
 
       - name: Build frontend
         run: npm run build
-
-      - name: ✅ Frontend build success
-        run: echo "✅ Frontend built successfully!"
+        working-directory: ./giftlink-frontend
 
   build-backend:
-    name: Build Node Backend
     runs-on: ubuntu-latest
     needs: build-frontend
 
-    defaults:
-      run:
-        working-directory: fullstack-capstone-project/giftlink-backend
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          path: fullstack-capstone-project
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies (backend)
+      - name: Install backend dependencies
         run: npm install
-
-      - name: ✅ Backend build success
-        run: echo "✅ Backend dependencies installed!"
+        working-directory: ./giftlink-backend
