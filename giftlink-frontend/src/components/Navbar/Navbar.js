@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../context/AuthContext';
 
 function Navbar() {
   const [userName, setUserName] = useState('');
+  const { isLoggedIn, setIsLoggedIn } = useAppContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     const name = sessionStorage.getItem('name');
-    if (name) setUserName(name);
-  }, []);
+    setUserName(name || '');
+  }, [isLoggedIn]); // reexecuta quando o login muda
 
   const handleLogout = () => {
     sessionStorage.clear();
+    setIsLoggedIn(false); // atualiza o contexto
     navigate('/login');
   };
 

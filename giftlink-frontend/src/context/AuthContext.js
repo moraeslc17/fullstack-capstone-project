@@ -1,16 +1,19 @@
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const AppContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
+export function AppProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!sessionStorage.getItem('auth-token')
+  );
 
   return (
-    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn, userName, setUserName }}>
+    <AppContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
     </AppContext.Provider>
   );
-};
+}
 
-export const useAppContext = () => useContext(AppContext);
+export function useAppContext() {
+  return useContext(AppContext);
+}
