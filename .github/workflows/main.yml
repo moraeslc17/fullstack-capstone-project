@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies (frontend)
+      - name: Install frontend dependencies
         run: npm install
         working-directory: giftlink-frontend
 
@@ -29,10 +29,11 @@ jobs:
       - name: ✅ Frontend build success
         run: echo "✅ Frontend built successfully!"
 
+
   build-backend:
     name: Build Node Backend
     runs-on: ubuntu-latest
-    needs: build-frontend  # só roda depois do frontend
+    needs: build-frontend  # roda só após o frontend
 
     steps:
       - name: Checkout code
@@ -43,10 +44,9 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies (backend)
+      - name: Install backend dependencies
         run: npm install
         working-directory: giftlink-backend
 
       - name: ✅ Backend build success
         run: echo "✅ Backend dependencies installed!"
-
