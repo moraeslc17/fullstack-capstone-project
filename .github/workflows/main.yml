@@ -6,19 +6,24 @@ on:
 
 jobs:
   build-frontend:
+    name: Build React Frontend
     runs-on: ubuntu-latest
-    name: Build Frontend
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Corrigir subdiretório duplicado
+        run: |
+          mv fullstack-capstone-project/* . 
+          rmdir fullstack-capstone-project
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install frontend dependencies
+      - name: Install dependencies (frontend)
         run: npm install
         working-directory: giftlink-frontend
 
@@ -26,20 +31,31 @@ jobs:
         run: npm run build
         working-directory: giftlink-frontend
 
+      - name: ✅ Frontend build success
+        run: echo "✅ Frontend built successfully!"
+
   build-backend:
+    name: Build Node Backend
     runs-on: ubuntu-latest
-    name: Build Backend
     needs: build-frontend
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Corrigir subdiretório duplicado
+        run: |
+          mv fullstack-capstone-project/* . 
+          rmdir fullstack-capstone-project
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install backend dependencies
+      - name: Install dependencies (backend)
         run: npm install
         working-directory: giftlink-backend
+
+      - name: ✅ Backend build success
+        run: echo "✅ Backend dependencies installed!"
