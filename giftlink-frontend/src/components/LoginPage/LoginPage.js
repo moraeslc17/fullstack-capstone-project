@@ -5,6 +5,8 @@ import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 //Step 1 - Task 3
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 import './LoginPage.css';
 
@@ -20,11 +22,12 @@ function LoginPage() {
 
     //Step 1 - Task 6
     useEffect(() => {
-        if (sessionStorage.getItem('auth-token')) {
-          navigate('/app')
+        const token = sessionStorage.getItem('auth-token');
+        if (token && token !== "undefined") {
+          navigate('/app');
         }
-      }, [navigate])
-
+      }, [navigate]);
+      
     const handleLogin = async (e) => {
         e.preventDefault();
         //api call
@@ -101,7 +104,7 @@ function LoginPage() {
                         </div>
                         <button className="btn btn-primary w-100 mb-3" onClick={handleLogin}>Login</button>
                         <p className="mt-4 text-center">
-                            New here? <a href="/app/register" className="text-primary">Register Here</a>
+                            New here? <Link to="/register" className="text-primary">Register Here</Link>
                         </p>
                     </div>
                 </div>

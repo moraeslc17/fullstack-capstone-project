@@ -2,38 +2,48 @@ const express = require('express');
 const router = express.Router();
 const connectToDatabase = require('../models/db');
 
-// Search for gifts
-router.get('/', async (req, res, next) => {
+// GET /api/gifts – retorna todos os presentes
+router.get('/', async (req, res) => {
     try {
-        // Task 1: Connect to MongoDB
+        const db = await connectToDatabase();
+        const collection = db.collection('gifts');
+        const gifts = await collection.find().toArray();
+        res.json(gifts);
+    } catch (e) {
+        console.error('Error fetching gifts:', e);
+        res.status(500).send('Error fetching gifts');
+    }
+});
+
+// GET /api/gifts/:id – retorna um presente específico por id
+router.get('/:id', async (req, res) => {
+    try {
+        const db = await connectToDatabase();
+        const collection = db.collection('gifts');
+
+        const id = parseInt(req.params.id); // converte o id da URL para número
+
+        const gift = await collection.findOne({ id }); // busca usando número
+
+        if (!gift) {
+            return res.status(404).send('Gift not found');
+        }
+
+        res.json(gift);
+    } catch (e) {
+        console.error('Error fetching gift:', e);
+        res.status(500).send('Error fetching gift');
+    }
+});
+
+// POST /api/gifts – adiciona um novo presente
+router.post('/', async (req, res, next) => {
+    try {
         const db = await connectToDatabase();
         const collection = db.collection("gifts");
+        const result = await collection.insertOne(req.body);
 
-        // Initialize the query object
-        let query = {};
-
-        // Task 2: Add the name filter to the query if not empty
-        if (req.query.name && req.query.name.trim() !== '') {
-            query.name = { $regex: req.query.name, $options: "i" }; // case-insensitive match
-        }
-
-        // Task 3: Add other filters to the query
-        if (req.query.category) {
-            query.category = req.query.category;
-        }
-
-        if (req.query.condition) {
-            query.condition = req.query.condition;
-        }
-
-        if (req.query.age_years) {
-            query.age_years = { $lte: parseInt(req.query.age_years) };
-        }
-
-        // Task 4: Fetch filtered gifts
-        const gifts = await collection.find(query).toArray();
-
-        res.json(gifts);
+        res.status(201).json(result.ops ? result.ops[0] : req.body);
     } catch (e) {
         next(e);
     }
