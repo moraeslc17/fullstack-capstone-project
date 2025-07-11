@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          path: fullstack-capstone-project
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -22,11 +20,11 @@ jobs:
 
       - name: Install dependencies (frontend)
         run: npm install
-        working-directory: fullstack-capstone-project/giftlink-frontend
+        working-directory: giftlink-frontend
 
       - name: Build frontend
         run: npm run build
-        working-directory: fullstack-capstone-project/giftlink-frontend
+        working-directory: giftlink-frontend
 
       - name: ✅ Frontend build success
         run: echo "✅ Frontend built successfully!"
@@ -39,8 +37,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          path: fullstack-capstone-project
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -49,7 +45,7 @@ jobs:
 
       - name: Install dependencies (backend)
         run: npm install
-        working-directory: fullstack-capstone-project/giftlink-backend
+        working-directory: giftlink-backend
 
       - name: ✅ Backend build success
         run: echo "✅ Backend dependencies installed!"
